@@ -10,6 +10,10 @@ inputs:
     description: 'Skip errors and warnings (e.g. E4,W)'
     requred: false
     default: ''
+  max_line_length:
+    description: 'Set maximum allowed line length'
+    requred: false
+    default: ''
   only_warn:
     description: 'If set, only warn, never error'
     requred: false
