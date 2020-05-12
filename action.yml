@@ -6,6 +6,10 @@ inputs:
     description: 'Path to run flake8 in'
     requred: false
     default: ''
+  ignore:
+    description: 'Skip errors and warnings (e.g. E4,W)'
+    requred: false
+    default: ''
   only_warn:
     description: 'If set, only warn, never error'
     requred: false
