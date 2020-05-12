@@ -10,10 +10,10 @@ echo "::add-matcher::${RUNNER_TEMP}/_github_workflow/flake8-matcher.json"
 # but there is no other good universal way of doing so.
 # e.g. PIPESTATUS and pipestatus only work in bash/zsh respectively.
 echo "Running flake8 on '${INPUT_PATH}' with the following options..."
-command_args = ""
+command_args=""
 echo "Ignoring '${INPUT_IGNORE}'"
 if [ "x${INPUT_IGNORE}" != "x" ]; then 
-    command_args = "${command_args} --ignore ${INPUT_IGNORE}"
+    command_args="${command_args} --ignore ${INPUT_IGNORE}"
 fi
 echo "Resulting CLI options ${command_args}"
 exec 5>&1
