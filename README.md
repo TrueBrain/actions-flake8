@@ -22,6 +22,32 @@ with:
   path: src
 ```
 
+### Parameter: ignore
+
+Indicates errors and warnings to skip.
+
+This parameter is optional; by default no alerts will be ignored
+
+```
+uses: TrueBrain/actions-flake8@master
+with:
+  ignore: E4,W
+```
+
+
+### Parameter: max_line_length
+
+Indicates the maximum allowed line length.
+
+This parameter is optional; by default flake8's default line length will be used.
+
+```
+uses: TrueBrain/actions-flake8@master
+with:
+  max_line_length: 90
+```
+
+
 ### Parameter: only_warn
 
 Only warn about problems.
