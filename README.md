@@ -1,7 +1,7 @@
 # Flake8 with GitHub Actions -- including annotations for Pull Requests
 
 This GitHub Actions runs flake8 over your code.
-Any warnings or errors will be annoted in the Pull Request.
+Any warnings or errors will be annotated in the Pull Request.
 
 ## Usage
 
