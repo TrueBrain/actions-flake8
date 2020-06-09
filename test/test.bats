@@ -3,8 +3,6 @@
 # Tests using the Bats testing framework
 # https://github.com/bats-core/bats-core
 
-ROOT_ERROR_COUNT=5
-
 export RUNNER_TEMP="/foo/runner_temp"
 
 # This function runs before every test
@@ -18,7 +16,7 @@ function setup() {
 
 @test "Run with defaults" {
     # codespell's exit status is the number of misspelled words found
-    expectedExitStatus=$((ROOT_MISSPELLING_COUNT + HIDDEN_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT))
+    expectedExitStatus=1
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
 
@@ -38,14 +36,14 @@ function setup() {
 }
 
 @test "Check the ignore option" {
-    expectedExitStatus=$((ROOT_MISSPELLING_COUNT + HIDDEN_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT - EXCLUDED_MISSPELLING_COUNT))
+    expectedExitStatus=1
     INPUT_EXCLUDE_FILE="./test/exclude-file.txt"
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
 }
 
 @test "Custom path" {
-    expectedExitStatus=$((SUBFOLDER_MISSPELLING_COUNT))
+    expectedExitStatus=1
     INPUT_PATH="./test/testdata/subfolder"
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
