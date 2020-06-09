@@ -41,3 +41,18 @@ jobs:
 
       - name: Run Bats tests
         run: bats "./test"
+
+  diagnose_bats:
+    name: Diagnose bats
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+      - run: pip --quiet --quiet install -r requirements.txt
+      - run: |
+          export INPUT_IGNORE=""
+          export INPUT_MAX_LINE_LENGTH=""
+          export INPUT_PATH="./test/testdata"
+          export INPUT_ONLY_WARN=""
+          ./entrypoint.sh
