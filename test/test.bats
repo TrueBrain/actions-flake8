@@ -26,7 +26,7 @@ function setup() {
     [ "${lines[1]}" == "::add-matcher::${RUNNER_TEMP}/_github_workflow/flake8-matcher.json" ]
     outputRegex="^Running flake8 on '${INPUT_PATH}'"
     [[ "${lines[2]}" =~ $outputRegex ]]
-    [ "${lines[-3]}" == "flake8 found one or more problems" ]
+    [ "${lines[-3]}" == "Flake8 found one or more problems" ]
     [ "${lines[-1]}" == "::remove-matcher owner=flake8::" ]
 }
 
