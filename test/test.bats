@@ -30,7 +30,8 @@ function setup() {
 
 @test "Check max line length" {
     expectedExitStatus=0
-    INPUT_PATH="./test/testdata/.hidden"
+    INPUT_MAX_LINE_LENGTH=90
+    INPUT_PATH="./test/testdata/testlinelength.py"
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
 }
