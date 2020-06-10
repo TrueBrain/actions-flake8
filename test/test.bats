@@ -37,14 +37,16 @@ function setup() {
 }
 
 @test "Check the ignore option" {
-    expectedExitStatus=1
-    INPUT_EXCLUDE_FILE="./test/exclude-file.txt"
+    expectedExitStatus=0
+    INPUT_IGNORE="E501"
+    INPUT_PATH="./test/testdata/testlinelength.py"
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
 }
 
 @test "Custom path" {
-    expectedExitStatus=1
+    expectedExitStatus=0
+    # The file in this folder has no errors
     INPUT_PATH="./test/testdata/subfolder"
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
