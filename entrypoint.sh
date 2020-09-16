@@ -22,7 +22,8 @@ echo "Resulting command: flake8 ${command_args}"
 
 # Run flake8
 flake8 ${command_args}
-if [ "$?" = "0" ]; then
+res=$?
+if [ "$res" = "0" ]; then
     echo "Flake8 found no problems"
 else
     echo "Flake8 found one or more problems"
