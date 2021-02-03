@@ -1,7 +1,11 @@
 # Flake8 with GitHub Actions -- including annotations for Pull Requests
 
+[![GitHub License](https://img.shields.io/github/license/TrueBrain/actions-flake8)](https://github.com/TrueBrain/actions-flake8/blob/master/LICENSE)
+[![GitHub Tag](https://img.shields.io/github/v/tag/TrueBrain/actions-flake8?include_prereleases&label=stable)](https://github.com/TrueBrain/actions-flake8/releases)
+[![GitHub commits since latest release](https://img.shields.io/github/commits-since/TrueBrain/actions-flake8/latest/master)](https://github.com/TrueBrain/actions-flake8/commits/master)
+
 This GitHub Actions runs flake8 over your code.
-Any warnings or errors will be annoted in the Pull Request.
+Any warnings or errors will be annotated in the Pull Request.
 
 ## Usage
 

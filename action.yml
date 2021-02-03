@@ -4,19 +4,19 @@ description: 'Flake8 with annotations for Pull Request'
 inputs:
   path:
     description: 'Path to run flake8 in'
-    requred: false
+    required: false
     default: ''
   ignore:
     description: 'Skip errors and warnings (e.g. E4,W)'
-    requred: false
+    required: false
     default: ''
   max_line_length:
     description: 'Set maximum allowed line length'
-    requred: false
+    required: false
     default: ''
   only_warn:
     description: 'If set, only warn, never error'
-    requred: false
+    required: false
     default: ''
 runs:
   using: 'docker'
