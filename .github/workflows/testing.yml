@@ -59,3 +59,21 @@ jobs:
 
       - name: Run Bats tests
         run: bats "./test"
+
+  diagnose_bats:
+    name: Diagnose bats
+    needs: test
+    if: always() && needs.test.result == 'failure'
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+      - run: pip --quiet --quiet install -r requirements.txt
+      - run: |
+          export INPUT_IGNORE=""
+          export INPUT_MAX_LINE_LENGTH=""
+          export INPUT_PATH="./test/testdata/linelength"
+          export INPUT_ONLY_WARN=""
+          ./entrypoint.sh
