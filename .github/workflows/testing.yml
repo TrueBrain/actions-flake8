@@ -3,8 +3,8 @@ name: Testing
 on: [push, pull_request]
 
 jobs:
-  run_action:
-    name: Test run action
+  run_action_warnings:
+    name: Test run action (triggers warnings)
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -12,6 +12,27 @@ jobs:
       with:
         path: test/testdata
         only_warn: 1
+        max_line_length: 90
+
+  run_action_valid:
+    name: Test run action (valid)
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: ./
+      with:
+        path: example_valid
+
+  codespell:
+    name: Check for spelling errors
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: codespell-project/actions-codespell@master
+      with:
+        check_filenames: true
+        check_hidden: true
+        skip: ./.git
 
   test:
     name: Run tests
