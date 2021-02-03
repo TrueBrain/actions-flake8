@@ -7,6 +7,17 @@ export RUNNER_TEMP="/foo/runner_temp"
 
 # This function runs before every test
 function setup() {
+    # Simulate the Dockerfile COPY command
+    [ -d "${RUNNER_TEMP}/code/" ] || sudo mkdir -p ${RUNNER_TEMP}/code/
+    [ -f "${RUNNER_TEMP}/code/flake8-matcher.json" ] || sudo cp flake8-matcher.json ${RUNNER_TEMP}/code/
+    #ls -alR ${RUNNER_TEMP}/code/
+    [ -d "/code/" ] || sudo mkdir -p /code/
+    [ -f "/code/flake8-matcher.json" ] || sudo cp flake8-matcher.json /code/
+    #ls -alR /code/
+    # Add a random place BATS tries to put it
+    [ -d "/github/workflow/" ] || sudo mkdir -p /github/workflow/ && sudo chmod 777 /github/workflow/
+    #ls -alR /github/workflow/
+    
     # Set default input values
     export INPUT_IGNORE=""
     export INPUT_MAX_LINE_LENGTH=""
