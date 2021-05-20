@@ -3,7 +3,7 @@ name: Testing
 on:
   pull_request:
     branches:
-    - master
+    - main
 
 jobs:
   run_action_warnings:
