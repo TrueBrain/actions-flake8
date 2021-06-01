@@ -1,4 +1,4 @@
-FROM python:3.8-alpine
+FROM python:3.9-alpine
 
 LABEL maintainer="github@truebrain.nl"
 LABEL org.opencontainers.image.author="Patric 'TrueBrain' Stout"
