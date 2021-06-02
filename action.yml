@@ -18,10 +18,20 @@ inputs:
     description: 'If set, only warn, never error'
     required: false
     default: ''
+  flake8_version:
+    description: 'What flake8 version to use, if none is installed (default is latest)'
+    required: false
+    default: ''
 runs:
   using: 'composite'
   steps:
-  - run: pip show -q flake8 || pip install flake8
+  - run: |
+      if [ -z "${{ inputs.flake8_version }}" ]; then
+        flake8_version=""
+      else
+        flake8_version="==${{ inputs.flake8_version }}"
+      fi
+      pip show -q flake8 || pip install flake8${flake8_version}
     shell: bash
   - run: ${{ github.action_path }}/action/entrypoint.sh
     shell: bash
@@ -30,6 +40,7 @@ runs:
       INPUT_IGNORE: ${{ inputs.ignore }}
       INPUT_MAX_LINE_LENGTH: ${{ inputs.max_line_length }}
       INPUT_ONLY_WARN: ${{ inputs.only_warn }}
+      INPUT_FLAKE8_VERSION: ${{ inputs.flake8_version }}
 branding:
   icon: 'code'
   color: 'blue'
