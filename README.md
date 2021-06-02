@@ -10,7 +10,20 @@ Any warnings or errors will be annotated in the Pull Request.
 ## Usage
 
 ```
-uses: TrueBrain/actions-flake8@v1
+uses: TrueBrain/actions-flake8@v2
+```
+
+By default it uses the default Python version as installed on the GitHub Runner.
+
+### Different Python version
+
+```
+uses: actions/setup-python@v2
+with:
+  python-version: 3.9
+uses: TrueBrain/actions-flake8@v2
+with:
+  path: src
 ```
 
 ### Parameter: path
@@ -21,7 +34,7 @@ This can be useful if your project is more than Python code.
 This parameter is optional; by default `flake8` will run on your whole repository.
 
 ```
-uses: TrueBrain/actions-flake8@v1
+uses: TrueBrain/actions-flake8@v2
 with:
   path: src
 ```
@@ -33,7 +46,7 @@ Indicates errors and warnings to skip.
 This parameter is optional; by default no alerts will be ignored
 
 ```
-uses: TrueBrain/actions-flake8@v1
+uses: TrueBrain/actions-flake8@v2
 with:
   ignore: E4,W
 ```
@@ -46,7 +59,7 @@ Indicates the maximum allowed line length.
 This parameter is optional; by default flake8's default line length will be used.
 
 ```
-uses: TrueBrain/actions-flake8@v1
+uses: TrueBrain/actions-flake8@v2
 with:
   max_line_length: 90
 ```
@@ -61,7 +74,7 @@ All errors and warnings are annotated in Pull Requests, but it will act like eve
 This parameter is optional; setting this to any value will enable it.
 
 ```
-uses: TrueBrain/actions-flake8@v1
+uses: TrueBrain/actions-flake8@v2
 with:
   only_warn: 1
 ```
