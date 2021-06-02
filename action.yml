@@ -19,8 +19,17 @@ inputs:
     required: false
     default: ''
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: 'composite'
+  steps:
+  - run: pip show -q flake8 || pip install flake8
+    shell: bash
+  - run: ${{ github.action_path }}/action/entrypoint.sh
+    shell: bash
+    env:
+      INPUT_PATH: ${{ inputs.path }}
+      INPUT_IGNORE: ${{ inputs.ignore }}
+      INPUT_MAX_LINE_LENGTH: ${{ inputs.max_line_length }}
+      INPUT_ONLY_WARN: ${{ inputs.only_warn }}
 branding:
   icon: 'code'
   color: 'blue'

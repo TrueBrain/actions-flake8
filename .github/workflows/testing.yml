@@ -10,7 +10,7 @@ jobs:
     name: Test run action (triggers warnings)
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - uses: ./
       with:
         path: example
@@ -21,10 +21,32 @@ jobs:
     name: Test run action (valid)
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - uses: ./
       with:
         path: example_valid
+
+  run_action_valid_custom_flake8:
+    name: Test run action (valid with custom Flake8)
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: pip install flake8
+    - uses: ./
+      with:
+        path: example_valid
+
+  run_action_valid_py39:
+    name: Test run action (valid with Python 3.9)
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+    - uses: ./
+      with:
+        path: example_valid_py39
 
   codespell:
     name: Check for spelling errors

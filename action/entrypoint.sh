@@ -1,11 +1,10 @@
 #!/bin/sh
 
-# Copy the matcher to a shared volume with the host; otherwise "add-matcher"
-# can't find it.
-cp /code/flake8-matcher.json ${HOME}/
-echo "::add-matcher::${HOME}/flake8-matcher.json"
+# Enable the matcher.
+ACTION_FOLDER=$(dirname ${0})
+echo "::add-matcher::${ACTION_FOLDER}/flake8-matcher.json"
 
-# Create the flake8 arguments
+# Create the flake8 arguments.
 echo "Running flake8 on '${INPUT_PATH}' with the following options:"
 command_args=""
 echo " - ignoring: '${INPUT_IGNORE}'"
@@ -20,7 +19,7 @@ echo " - path: '${INPUT_PATH}'"
 command_args="${command_args} ${INPUT_PATH}"
 echo "Resulting command: flake8 ${command_args}"
 
-# Run flake8
+# Run flake8.
 flake8 ${command_args}
 res=$?
 if [ "$res" = "0" ]; then
@@ -33,7 +32,7 @@ fi
 echo "::remove-matcher owner=flake8-error::"
 echo "::remove-matcher owner=flake8-warning::"
 
-# If we are in warn-only mode, return always as if we pass
+# If we are in warn-only mode, return always as if we pass.
 if [ -n "${INPUT_ONLY_WARN}" ]; then
     exit 0
 else
