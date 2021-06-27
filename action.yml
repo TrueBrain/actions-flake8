@@ -22,6 +22,18 @@ inputs:
     description: 'What flake8 version to use, if none is installed (default is latest)'
     required: false
     default: ''
+  plugins:
+    description: 'List of plugins to install before running, this is passed directly to pip install'
+    required: false
+    default: ''
+  error_classes:
+    description: 'List of flake8 error classes to classify as Error'
+    required: false
+    default: 'E,F'
+  warning_classes:
+    description: 'List of flake8 error classes to classify as Warning'
+    required: false
+    default: ''
 runs:
   using: 'composite'
   steps:
@@ -31,7 +43,11 @@ runs:
       else
         flake8_version="==${{ inputs.flake8_version }}"
       fi
-      pip install flake8${flake8_version}
+      plugins=
+      if [ -n "${{ inputs.plugins }}" ]; then
+        plugins="${{ inputs.plugins }}"
+      fi
+      pip install flake8${flake8_version} ${plugins}
     shell: bash
   - run: ${{ github.action_path }}/action/entrypoint.sh
     shell: bash
@@ -41,6 +57,9 @@ runs:
       INPUT_MAX_LINE_LENGTH: ${{ inputs.max_line_length }}
       INPUT_ONLY_WARN: ${{ inputs.only_warn }}
       INPUT_FLAKE8_VERSION: ${{ inputs.flake8_version }}
+      INPUT_PLUGINS: ${{ inputs.plugins }}
+      INPUT_ERROR_CLASSES: ${{ inputs.error_classes }}
+      INPUT_WARNING_CLASSES: ${{ inputs.warning_classes }}
 branding:
   icon: 'code'
   color: 'blue'

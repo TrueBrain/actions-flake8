@@ -58,6 +58,30 @@ jobs:
       with:
         path: example_valid_py39
 
+  run_action_with_plugin:
+    name: Test run action (plugins)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./
+        with:
+          plugins: flake8-bugbear
+          path: example_bugbear
+          only_warn: 1
+
+  run_action_with_classes:
+    name: Test run action (classes)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./
+        with:
+          plugins: flake8-bugbear
+          path: example_bugbear
+          warning_classes: E,F
+          error_classes: W,B
+          only_warn: 1
+
   codespell:
     name: Check for spelling errors
     runs-on: ubuntu-latest

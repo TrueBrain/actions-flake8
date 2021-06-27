@@ -15,7 +15,7 @@ steps:
 - uses: TrueBrain/actions-flake8@v2
 ```
 
-By default it uses the default Python version as installed on the GitHub Runner.
+By default, it uses the default Python version as installed on the GitHub Runner.
 
 ### Different Python version
 
@@ -114,4 +114,46 @@ steps:
 - uses: TrueBrain/actions-flake8@v2
   with:
     only_warn: 1
+```
+
+### Parameter: plugins
+
+List of plugins to install before running, This is passed directly to `pip install`.
+
+This parameter is optional; setting this to any value will enable it.
+
+```
+steps:
+- uses: actions/checkout@v2
+- uses: TrueBrain/actions-flake8@v2
+  with:
+    plugins: flake8-bugbear cohesion==0.9.1
+```
+
+### Parameter: error_classes
+
+List of flake8 [error classes](https://flake8.pycqa.org/en/latest/glossary.html#term-error-class) to classify as Error.
+
+This parameter is optional; by default `E` and `F` classes will be considered errors.
+
+```
+steps:
+- uses: actions/checkout@v2
+- uses: TrueBrain/actions-flake8@v2
+  with:
+    error_classes: E,H
+```
+
+### Parameter: warning_classes
+
+List of flake8 [error classes](https://flake8.pycqa.org/en/latest/glossary.html#term-error-class) to classify as Warning.
+
+This parameter is optional; by default all classes not contained in `error_classes` will be considered a warning.
+
+```
+steps:
+- uses: actions/checkout@v2
+- uses: TrueBrain/actions-flake8@v2
+  with:
+    warning_classes: W,B,D
 ```
