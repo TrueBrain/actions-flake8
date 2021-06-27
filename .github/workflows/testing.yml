@@ -58,6 +58,28 @@ jobs:
       with:
         path: example_valid_py39
 
+  run_action_with_plugin:
+    name: Test run action (plugins)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./
+        with:
+          plugins: flake8-bugbear
+          only_warn: 1
+
+  run_action_with_classes:
+    name: Test run action (plugins)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./
+        with:
+          plugins: flake8-bugbear
+          warning_classes: E,F
+          error_classes: W,B
+          only_warn: 1
+
   codespell:
     name: Check for spelling errors
     runs-on: ubuntu-latest
@@ -68,14 +90,3 @@ jobs:
         check_filenames: true
         check_hidden: true
         skip: ./.git
-
-  run_with_plugin_bugbear:
-    name: Check plugins are installed and classes loaded
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: ./
-        with:
-          plugins: flake8-bugbear
-          warning_classes: W,B
-          only_warn: 1

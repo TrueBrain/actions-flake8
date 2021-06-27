@@ -132,7 +132,7 @@ steps:
 
 ### Parameter: error_classes
 
-List of flake8 error classes to classify as Error.
+List of flake8 [error classes](https://flake8.pycqa.org/en/latest/glossary.html#term-error-class) to classify as Error.
 
 This parameter is optional; by default `E` and `F` classes will be considered errors.
 
@@ -146,9 +146,9 @@ steps:
 
 ### Parameter: warning_classes
 
-List of flake8 error classes to classify as Warning.
+List of flake8 [error classes](https://flake8.pycqa.org/en/latest/glossary.html#term-error-class) to classify as Warning.
 
-This parameter is optional; by default `W` class will be considered a warning.
+This parameter is optional; by default all classes not contained in `error_classes` will be considered a warning.
 
 ```
 steps:

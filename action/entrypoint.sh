@@ -1,11 +1,18 @@
-#!/bin/bash
+#!/bin/sh
 
 # Enable the matcher.
 ACTION_FOLDER=$(dirname ${0})
 echo " - error_classes: $INPUT_ERROR_CLASSES"
-sed -i "s/{{error_classes}}/${INPUT_ERROR_CLASSES//,/}/g" "${ACTION_FOLDER}/flake8-matcher.json"
+error_classes=$(echo "$INPUT_ERROR_CLASSES" | sed "s/,//g")
+sed -i "s/{{error_classes}}/${error_classes}/g" "${ACTION_FOLDER}/flake8-matcher.json"
+
 echo " - warning_classes: $INPUT_WARNING_CLASSES"
-sed -i "s/{{warning_classes}}/${INPUT_WARNING_CLASSES//,/}/g" "${ACTION_FOLDER}/flake8-matcher.json"
+if [ -n "$INPUT_WARNING_CLASSES" ]; then
+  warning_classes=$(echo "$INPUT_WARNING_CLASSES" | sed "s/,//g")
+  sed -i "s/{{warning_classes}}/${warning_classes}/g" "${ACTION_FOLDER}/flake8-matcher.json"
+else
+  sed -i "s/{{warning_classes}}/^${error_classes}/g" "${ACTION_FOLDER}/flake8-matcher.json"
+fi
 echo "::add-matcher::${ACTION_FOLDER}/flake8-matcher.json"
 
 # Create the flake8 arguments.

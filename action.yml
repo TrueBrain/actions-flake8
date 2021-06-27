@@ -23,17 +23,17 @@ inputs:
     required: false
     default: ''
   plugins:
-    description: 'List of plugins to install before running, This is passed directly to pip install'
+    description: 'List of plugins to install before running, this is passed directly to pip install'
     required: false
     default: ''
   error_classes:
-    description: 'List of flake8 error classes to classify as Error.'
+    description: 'List of flake8 error classes to classify as Error'
     required: false
     default: 'E,F'
   warning_classes:
-    description: 'List of flake8 error classes to classify as Warning.'
+    description: 'List of flake8 error classes to classify as Warning'
     required: false
-    default: 'W'
+    default: ''
 runs:
   using: 'composite'
   steps:
