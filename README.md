@@ -115,3 +115,32 @@ steps:
   with:
     only_warn: 1
 ```
+
+### Parameter: use_bugbear
+
+Enable [flake8-bugbear](https://github.com/PyCQA/flake8-bugbear) plugin.
+All bugbear warnings are annotated in Pull Requests.
+
+This parameter is optional; setting this to any value will enable it.
+
+```
+steps:
+- uses: actions/checkout@v2
+- uses: TrueBrain/actions-flake8@v2
+  with:
+    use_bugbear: true
+```
+
+### Parameter: bugbear_version
+
+In some cases you might want to pin a certain [flake8-bugbear](https://github.com/PyCQA/flake8-bugbear) version.
+
+This parameter is optional; by default the latest flake8-bugbear will be installed (if no flake8-bugbear is installed yet).
+
+```
+steps:
+- uses: actions/checkout@v2
+- uses: TrueBrain/actions-flake8@v2
+  with:
+    bugbear_version: 3.8.0
+```
