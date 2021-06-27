@@ -25,7 +25,7 @@ inputs:
   use_bugbear:
     description: 'If true, will install flake8-bugbear plugin'
     required: false
-    default: false
+    default: ''
   bugbear_version:
     description: 'What flake8-bugbear version to use, if none is installed (default is latest)'
     required: false
@@ -41,14 +41,15 @@ runs:
       fi
       pip show -q flake8 || pip install flake8${flake8_version}
     shell: bash
-  - if: ${{ inputs.use_bugbear }}
-    run: |
+  - run: |
       if [ -z "${{ inputs.bugbear_version }}" ]; then
         bugbear_version=""
       else
         bugbear_version="==${{ inputs.bugbear_version }}"
       fi
-      pip show -q flake8-bugbear || pip install flake8-bugbear${bugbear_version}
+      if [ -z "${{ inputs.use_bugbear }}" ]; then
+        pip show -q flake8-bugbear || pip install flake8-bugbear${bugbear_version}
+      fi
     shell: bash
   - run: ${{ github.action_path }}/action/entrypoint.sh
     shell: bash
