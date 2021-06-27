@@ -15,7 +15,7 @@ steps:
 - uses: TrueBrain/actions-flake8@v2
 ```
 
-By default it uses the default Python version as installed on the GitHub Runner.
+By default, it uses the default Python version as installed on the GitHub Runner.
 
 ### Different Python version
 
@@ -116,10 +116,9 @@ steps:
     only_warn: 1
 ```
 
-### Parameter: use_bugbear
+### Parameter: plugins
 
-Enable [flake8-bugbear](https://github.com/PyCQA/flake8-bugbear) plugin.
-All bugbear warnings are annotated in Pull Requests.
+List of plugins to install before running, This is passed directly to `pip install`.
 
 This parameter is optional; setting this to any value will enable it.
 
@@ -128,19 +127,33 @@ steps:
 - uses: actions/checkout@v2
 - uses: TrueBrain/actions-flake8@v2
   with:
-    use_bugbear: true
+    plugins: flake8-bugbear cohesion==0.9.1
 ```
 
-### Parameter: bugbear_version
+### Parameter: error_classes
 
-In some cases you might want to pin a certain [flake8-bugbear](https://github.com/PyCQA/flake8-bugbear) version.
+List of flake8 error classes to classify as Error.
 
-This parameter is optional; by default the latest flake8-bugbear will be installed (if no flake8-bugbear is installed yet).
+This parameter is optional; by default `E` and `F` classes will be considered errors.
 
 ```
 steps:
 - uses: actions/checkout@v2
 - uses: TrueBrain/actions-flake8@v2
   with:
-    bugbear_version: 3.8.0
+    error_classes: E,H
+```
+
+### Parameter: warning_classes
+
+List of flake8 error classes to classify as Warning.
+
+This parameter is optional; by default `W` class will be considered a warning.
+
+```
+steps:
+- uses: actions/checkout@v2
+- uses: TrueBrain/actions-flake8@v2
+  with:
+    warning_classes: W,B,D
 ```
