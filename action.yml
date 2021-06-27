@@ -47,7 +47,7 @@ runs:
       else
         bugbear_version="==${{ inputs.bugbear_version }}"
       fi
-      if [ -z "${{ inputs.use_bugbear }}" ]; then
+      if [ -n "${{ inputs.use_bugbear }}" ]; then
         pip show -q flake8-bugbear || pip install flake8-bugbear${bugbear_version}
       fi
     shell: bash
