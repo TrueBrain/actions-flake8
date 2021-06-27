@@ -2,6 +2,8 @@
 
 # Enable the matcher.
 ACTION_FOLDER=$(dirname ${0})
+sed -i "s/{{error_classes}}/${INPUT_ERROR_CLASSES//,/}/g" "${ACTION_FOLDER}/flake8-matcher.json"
+sed -i "s/{{warning_classes}}/${INPUT_WARNING_CLASSES//,/}/g" "${ACTION_FOLDER}/flake8-matcher.json"
 echo "::add-matcher::${ACTION_FOLDER}/flake8-matcher.json"
 
 # Create the flake8 arguments.
@@ -31,7 +33,6 @@ fi
 # Remove the matcher, so no other jobs hit it.
 echo "::remove-matcher owner=flake8-error::"
 echo "::remove-matcher owner=flake8-warning::"
-echo "::remove-matcher owner=flake8-bugbear-warning::"
 
 # If we are in warn-only mode, return always as if we pass.
 if [ -n "${INPUT_ONLY_WARN}" ]; then

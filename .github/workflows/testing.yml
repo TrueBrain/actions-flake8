@@ -68,3 +68,13 @@ jobs:
         check_filenames: true
         check_hidden: true
         skip: ./.git
+
+  run_with_plugin_bugbear:
+    name: Check plugins are installed and classes loaded
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./
+        with:
+          plugins: flake8-bugbear
+          warning_classes: W,B

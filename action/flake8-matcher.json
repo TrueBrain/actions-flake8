@@ -5,7 +5,7 @@
             "severity": "error",
             "pattern": [
                 {
-                    "regexp": "^([^:]*):(\\d+):(\\d+): ([EF]\\d\\d\\d) (.*)$",
+                    "regexp": "^([^:]*):(\\d+):(\\d+): ([{{error_classes}}]\\d\\d\\d) (.*)$",
                     "file": 1,
                     "line": 2,
                     "column": 3,
@@ -19,21 +19,7 @@
             "severity": "warning",
             "pattern": [
                 {
-                    "regexp": "^([^:]*):(\\d+):(\\d+): ([W]\\d\\d\\d) (.*)$",
-                    "file": 1,
-                    "line": 2,
-                    "column": 3,
-                    "code": 4,
-                    "message": 5
-                }
-            ]
-        },
-        {
-            "owner": "flake8-bugbear-warning",
-            "severity": "warning",
-            "pattern": [
-                {
-                    "regexp": "^([^:]*):(\\d+):(\\d+): ([B]\\d\\d\\d) (.*)$",
+                    "regexp": "^([^:]*):(\\d+):(\\d+): ([{{warning_classes}}]\\d\\d\\d) (.*)$",
                     "file": 1,
                     "line": 2,
                     "column": 3,

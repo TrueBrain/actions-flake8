@@ -22,14 +22,18 @@ inputs:
     description: 'What flake8 version to use, if none is installed (default is latest)'
     required: false
     default: ''
-  use_bugbear:
-    description: 'If true, will install flake8-bugbear plugin'
+  plugins:
+    description: 'List of plugins to install before running, This is passed directly to pip install'
     required: false
     default: ''
-  bugbear_version:
-    description: 'What flake8-bugbear version to use, if none is installed (default is latest)'
+  error_classes:
+    description: 'List of flake8 error classes to classify as Error.'
     required: false
-    default: ''
+    default: 'E,F'
+  warning_classes:
+    description: 'List of flake8 error classes to classify as Warning.'
+    required: false
+    default: 'W'
 runs:
   using: 'composite'
   steps:
@@ -40,16 +44,9 @@ runs:
         flake8_version="==${{ inputs.flake8_version }}"
       fi
       pip show -q flake8 || pip install flake8${flake8_version}
-    shell: bash
-  - run: |
-      if [ -z "${{ inputs.bugbear_version }}" ]; then
-        bugbear_version=""
-      else
-        bugbear_version="==${{ inputs.bugbear_version }}"
-      fi
-      if [ -n "${{ inputs.use_bugbear }}" ]; then
-        pip show -q flake8-bugbear || pip install flake8-bugbear${bugbear_version}
-      fi
+      if [ -n "${{ inputs.plugins }}" ]
+        plugins="${{ inputs.plugins }}"
+        pip install ${plugins}
     shell: bash
   - run: ${{ github.action_path }}/action/entrypoint.sh
     shell: bash
