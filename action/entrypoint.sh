@@ -31,6 +31,7 @@ fi
 # Remove the matcher, so no other jobs hit it.
 echo "::remove-matcher owner=flake8-error::"
 echo "::remove-matcher owner=flake8-warning::"
+echo "::remove-matcher owner=flake8-bugbear-warning::"
 
 # If we are in warn-only mode, return always as if we pass.
 if [ -n "${INPUT_ONLY_WARN}" ]; then
