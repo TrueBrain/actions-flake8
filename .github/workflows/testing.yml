@@ -69,7 +69,7 @@ jobs:
           only_warn: 1
 
   run_action_with_classes:
-    name: Test run action (plugins)
+    name: Test run action (classes)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
