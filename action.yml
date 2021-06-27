@@ -43,10 +43,7 @@ runs:
       else
         flake8_version="==${{ inputs.flake8_version }}"
       fi
-      pip show -q flake8 || pip install flake8${flake8_version}
-      if [ -n "${{ inputs.plugins }}" ]
-        plugins="${{ inputs.plugins }}"
-        pip install ${plugins}
+      pip install flake8${flake8_version} "${{ inputs.plugins }}"
     shell: bash
   - run: ${{ github.action_path }}/action/entrypoint.sh
     shell: bash
