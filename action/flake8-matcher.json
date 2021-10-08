@@ -5,7 +5,7 @@
             "severity": "error",
             "pattern": [
                 {
-                    "regexp": "^([^:]*):(\\d+):(\\d+): ([{{error_classes}}]\\d\\d\\d) (.*)$",
+                    "regexp": "^([^:]*):(\\d+):(\\d+): ({{error_expression}}\\d\\d\\d) (.*)$",
                     "file": 1,
                     "line": 2,
                     "column": 3,
@@ -19,7 +19,7 @@
             "severity": "warning",
             "pattern": [
                 {
-                    "regexp": "^([^:]*):(\\d+):(\\d+): ([{{warning_classes}}]\\d\\d\\d) (.*)$",
+                    "regexp": "^([^:]*):(\\d+):(\\d+): ({{warning_expression}}\\d\\d\\d) (.*)$",
                     "file": 1,
                     "line": 2,
                     "column": 3,
