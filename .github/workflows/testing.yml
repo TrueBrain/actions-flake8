@@ -107,6 +107,20 @@ jobs:
             ignore: E,F,W,C                 # ignore everything except BLK
             error_classes: BLK
             only_warn: 1
+    
+  run_action_with_exclude_option:
+    # we exclude the flake-black example, so no BLK shall be reported
+    name: Test run action (exclude option)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./
+        with:
+            plugins: flake8-black
+            exclude: example_black
+            ignore: E,F,W,C                 # ignore everything except BLK
+            error_classes: BLK
+            only_warn: 1
 
   codespell:
     name: Check for spelling errors
