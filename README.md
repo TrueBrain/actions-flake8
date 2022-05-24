@@ -99,7 +99,6 @@ steps:
     max_line_length: 90
 ```
 
-
 ### Parameter: only_warn
 
 Only warn about problems.
@@ -156,4 +155,19 @@ steps:
 - uses: TrueBrain/actions-flake8@v2
   with:
     warning_classes: W,B,D
+```
+
+### Parameter: extra_arguments
+
+Extra arguments to give to flake8.
+Useful when you need to give an argument this action otherwise doesn't supply (like `--max-complexity`, `--hang-closing`, ...).
+
+This parameter is optional; by default it is empty.
+
+```
+steps:
+- uses: actions/checkout@v2
+- uses: TrueBrain/actions-flake8@v2
+  with:
+    extra_arguments: "--hang-closing"
 ```

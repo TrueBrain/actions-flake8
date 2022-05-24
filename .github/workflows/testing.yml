@@ -82,6 +82,16 @@ jobs:
           error_classes: W,B
           only_warn: 1
 
+  run_action_with_extra_arguments:
+    name: Test run action (extra arguments)
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ./
+      with:
+        path: example_length
+        extra_arguments: "--max-line-length 90"
+
   codespell:
     name: Check for spelling errors
     runs-on: ubuntu-latest

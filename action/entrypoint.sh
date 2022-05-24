@@ -17,17 +17,27 @@ echo "::add-matcher::${ACTION_FOLDER}/flake8-matcher.json"
 
 # Create the flake8 arguments.
 echo "Running flake8 on '${INPUT_PATH}' with the following options:"
+
 command_args=""
+
 echo " - ignoring: '${INPUT_IGNORE}'"
 if [ "x${INPUT_IGNORE}" != "x" ]; then
     command_args="${command_args} --ignore ${INPUT_IGNORE}"
 fi
+
 echo " - max line length: '${INPUT_MAX_LINE_LENGTH}'"
 if [ "x${INPUT_MAX_LINE_LENGTH}" != "x" ]; then
     command_args="${command_args} --max-line-length ${INPUT_MAX_LINE_LENGTH}"
 fi
+
 echo " - path: '${INPUT_PATH}'"
 command_args="${command_args} ${INPUT_PATH}"
+
+echo " - extra arguments: '${INPUT_EXTRA_ARGUMENTS}'"
+if [ "x${INPUT_EXTRA_ARGUMENTS}" != "x" ]; then
+    command_args="${command_args} ${INPUT_EXTRA_ARGUMENTS}"
+fi
+
 echo "Resulting command: flake8 ${command_args}"
 
 # Run flake8.

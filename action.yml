@@ -34,6 +34,10 @@ inputs:
     description: 'List of flake8 error classes to classify as Warning'
     required: false
     default: ''
+  extra_arguments:
+    description: 'Extra arguments given to flake8'
+    required: false
+    default: ''
 runs:
   using: 'composite'
   steps:
@@ -60,6 +64,7 @@ runs:
       INPUT_PLUGINS: ${{ inputs.plugins }}
       INPUT_ERROR_CLASSES: ${{ inputs.error_classes }}
       INPUT_WARNING_CLASSES: ${{ inputs.warning_classes }}
+      INPUT_EXTRA_ARGUMENTS: ${{ inputs.extra_arguments }}
 branding:
   icon: 'code'
   color: 'blue'
