@@ -11,7 +11,7 @@ Any warnings or errors will be annotated in the Pull Request.
 
 ```
 steps:
-- uses: actions/checkout@v2
+- uses: actions/checkout@v3
 - uses: TrueBrain/actions-flake8@v2
 ```
 
@@ -21,10 +21,10 @@ By default, it uses the default Python version as installed on the GitHub Runner
 
 ```
 steps:
-- uses: actions/checkout@v2
-- uses: actions/setup-python@v2
+- uses: actions/checkout@v3
+- uses: actions/setup-python@v3
   with:
-    python-version: 3.9
+    python-version: "3.10"
 - uses: TrueBrain/actions-flake8@v2
   with:
     path: src
@@ -38,18 +38,18 @@ This parameter is optional; by default the latest flake8 will be installed (if n
 
 ```
 steps:
-- uses: actions/checkout@v2
+- uses: actions/checkout@v3
 - uses: TrueBrain/actions-flake8@v2
   with:
-    flake8_version: 3.8.0
+    flake8_version: 4.0.1
 ```
 
 Alternatively, you can pre-install flake8 before executing this action:
 
 ```
 steps:
-- uses: actions/checkout@v2
-- run: pip install flake8==3.8.0
+- uses: actions/checkout@v3
+- run: pip install flake8==4.0.1
 - uses: TrueBrain/actions-flake8@v2
 ```
 
@@ -64,7 +64,7 @@ This parameter is optional; by default `flake8` will run on your whole repositor
 
 ```
 steps:
-- uses: actions/checkout@v2
+- uses: actions/checkout@v3
 - uses: TrueBrain/actions-flake8@v2
   with:
     path: src
@@ -78,7 +78,7 @@ This parameter is optional; by default no alerts will be ignored
 
 ```
 steps:
-- uses: actions/checkout@v2
+- uses: actions/checkout@v3
 - uses: TrueBrain/actions-flake8@v2
   with:
     ignore: E4,W
@@ -93,7 +93,7 @@ This parameter is optional; by default flake8's default line length will be used
 
 ```
 steps:
-- uses: actions/checkout@v2
+- uses: actions/checkout@v3
 - uses: TrueBrain/actions-flake8@v2
   with:
     max_line_length: 90
@@ -109,7 +109,7 @@ This parameter is optional; setting this to any value will enable it.
 
 ```
 steps:
-- uses: actions/checkout@v2
+- uses: actions/checkout@v3
 - uses: TrueBrain/actions-flake8@v2
   with:
     only_warn: 1
@@ -123,7 +123,7 @@ This parameter is optional; setting this to any value will enable it.
 
 ```
 steps:
-- uses: actions/checkout@v2
+- uses: actions/checkout@v3
 - uses: TrueBrain/actions-flake8@v2
   with:
     plugins: flake8-bugbear cohesion==0.9.1
@@ -137,7 +137,7 @@ This parameter is optional; by default `E` and `F` classes will be considered er
 
 ```
 steps:
-- uses: actions/checkout@v2
+- uses: actions/checkout@v3
 - uses: TrueBrain/actions-flake8@v2
   with:
     error_classes: E,H
@@ -151,7 +151,7 @@ This parameter is optional; by default all classes not contained in `error_class
 
 ```
 steps:
-- uses: actions/checkout@v2
+- uses: actions/checkout@v3
 - uses: TrueBrain/actions-flake8@v2
   with:
     warning_classes: W,B,D
@@ -166,7 +166,7 @@ This parameter is optional; by default it is empty.
 
 ```
 steps:
-- uses: actions/checkout@v2
+- uses: actions/checkout@v3
 - uses: TrueBrain/actions-flake8@v2
   with:
     extra_arguments: "--hang-closing"
