@@ -10,7 +10,7 @@ jobs:
     name: Test run action (triggers warnings)
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - uses: ./
       with:
         path: example
@@ -21,7 +21,7 @@ jobs:
     name: Test run action (valid)
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - uses: ./
       with:
         path: example_valid
@@ -30,7 +30,7 @@ jobs:
     name: Test run action (valid with custom Flake8)
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - run: pip install flake8==3.8.0
     - uses: ./
       with:
@@ -40,7 +40,7 @@ jobs:
     name: Test run action (valid with Flake 3.8.0)
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - uses: ./
       with:
         path: example_valid
@@ -50,8 +50,8 @@ jobs:
     name: Test run action (valid with Python 3.9)
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-python@v2
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v3
       with:
         python-version: 3.9
     - uses: ./
@@ -62,7 +62,7 @@ jobs:
     name: Test run action (plugins)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./
         with:
           plugins: flake8-bugbear
@@ -73,7 +73,7 @@ jobs:
     name: Test run action (classes)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./
         with:
           plugins: flake8-bugbear
@@ -86,7 +86,7 @@ jobs:
     name: Test run action (extra arguments)
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - uses: ./
       with:
         path: example_length
@@ -96,7 +96,7 @@ jobs:
     name: Check for spelling errors
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - uses: codespell-project/actions-codespell@master
       with:
         check_filenames: true
