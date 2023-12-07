@@ -4,14 +4,14 @@
 [![GitHub Tag](https://img.shields.io/github/v/tag/TrueBrain/actions-flake8?include_prereleases&label=stable)](https://github.com/TrueBrain/actions-flake8/releases)
 [![GitHub commits since latest release](https://img.shields.io/github/commits-since/TrueBrain/actions-flake8/latest/main)](https://github.com/TrueBrain/actions-flake8/commits/main)
 
-This GitHub Actions runs flake8 over your code.
+This GitHub Actions runs [flake8](https://github.com/PyCQA/flake8) over your code.
 Any warnings or errors will be annotated in the Pull Request.
 
 ## Usage
 
-```
+```yaml
 steps:
-- uses: actions/checkout@v3
+- uses: actions/checkout@v4
 - uses: TrueBrain/actions-flake8@v2
 ```
 
@@ -19,10 +19,10 @@ By default, it uses the default Python version as installed on the GitHub Runner
 
 ### Different Python version
 
-```
+```yaml
 steps:
-- uses: actions/checkout@v3
-- uses: actions/setup-python@v3
+- uses: actions/checkout@v4
+- uses: actions/setup-python@v5
   with:
     python-version: 3.9
 - uses: TrueBrain/actions-flake8@v2
@@ -36,19 +36,19 @@ In some cases you might want to pin a certain flake8 version.
 
 This parameter is optional; by default the latest flake8 will be installed (if no flake8 is installed yet).
 
-```
+```yaml
 steps:
-- uses: actions/checkout@v3
+- uses: actions/checkout@v4
 - uses: TrueBrain/actions-flake8@v2
   with:
-    flake8_version: 3.8.0
+    flake8_version: 6.1.0
 ```
 
 Alternatively, you can pre-install flake8 before executing this action:
 
-```
+```yaml
 steps:
-- uses: actions/checkout@v3
+- uses: actions/checkout@v4
 - run: pip install flake8==3.8.0
 - uses: TrueBrain/actions-flake8@v2
 ```
@@ -62,9 +62,9 @@ This can be useful if your project is more than Python code.
 
 This parameter is optional; by default `flake8` will run on your whole repository.
 
-```
+```yaml
 steps:
-- uses: actions/checkout@v3
+- uses: actions/checkout@v4
 - uses: TrueBrain/actions-flake8@v2
   with:
     path: src
@@ -76,14 +76,13 @@ Indicates errors and warnings to skip.
 
 This parameter is optional; by default no alerts will be ignored
 
-```
+```yaml
 steps:
-- uses: actions/checkout@v3
+- uses: actions/checkout@v4
 - uses: TrueBrain/actions-flake8@v2
   with:
     ignore: E4,W
 ```
-
 
 ### Parameter: max_line_length
 
@@ -91,9 +90,9 @@ Indicates the maximum allowed line length.
 
 This parameter is optional; by default flake8's default line length will be used.
 
-```
+```yaml
 steps:
-- uses: actions/checkout@v3
+- uses: actions/checkout@v4
 - uses: TrueBrain/actions-flake8@v2
   with:
     max_line_length: 90
@@ -107,9 +106,9 @@ All errors and warnings are annotated in Pull Requests, but it will act like eve
 
 This parameter is optional; setting this to any value will enable it.
 
-```
+```yaml
 steps:
-- uses: actions/checkout@v3
+- uses: actions/checkout@v4
 - uses: TrueBrain/actions-flake8@v2
   with:
     only_warn: 1
@@ -121,9 +120,9 @@ List of plugins to install before running, This is passed directly to `pip insta
 
 This parameter is optional; setting this to any value will enable it.
 
-```
+```yaml
 steps:
-- uses: actions/checkout@v3
+- uses: actions/checkout@v4
 - uses: TrueBrain/actions-flake8@v2
   with:
     plugins: flake8-bugbear cohesion==0.9.1
@@ -135,9 +134,9 @@ List of flake8 [error classes](https://flake8.pycqa.org/en/latest/glossary.html#
 
 This parameter is optional; by default `E` and `F` classes will be considered errors.
 
-```
+```yaml
 steps:
-- uses: actions/checkout@v3
+- uses: actions/checkout@v4
 - uses: TrueBrain/actions-flake8@v2
   with:
     error_classes: E,H
@@ -149,9 +148,9 @@ List of flake8 [error classes](https://flake8.pycqa.org/en/latest/glossary.html#
 
 This parameter is optional; by default all classes not contained in `error_classes` will be considered a warning.
 
-```
+```yaml
 steps:
-- uses: actions/checkout@v3
+- uses: actions/checkout@v4
 - uses: TrueBrain/actions-flake8@v2
   with:
     warning_classes: W,B,D
@@ -164,9 +163,9 @@ Useful when you need to give an argument this action otherwise doesn't supply (l
 
 This parameter is optional; by default it is empty.
 
-```
+```yaml
 steps:
-- uses: actions/checkout@v3
+- uses: actions/checkout@v4
 - uses: TrueBrain/actions-flake8@v2
   with:
     extra_arguments: "--hang-closing"
