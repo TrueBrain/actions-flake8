@@ -170,3 +170,31 @@ steps:
   with:
     extra_arguments: "--hang-closing"
 ```
+
+## Advanced use-case
+
+The section below is an effort to document advanced use-cases that don't fit in the scope of this action. 
+
+Feel free to contribute to it ! 
+
+
+### Run flake8 on changed files only
+
+If you want to run flake8 only against changed files you can achieve it using the following code : 
+
+```
+- uses: actions/checkout@v2
+  with:
+    fetch-depth: -1
+- name: Setup Python
+  uses: actions/setup-python@v2
+  with:
+    python-version: 3.9
+- id: find_changed_files
+  run: echo ::set-output name=changed_files::$(git diff --name-only ${{github.sha}} ${{github.event.pull_request.base.sha}} | tr ' ' '\n' | grep .py | tr '\n' ' ')
+- uses: TrueBrain/actions-flake8@v2
+  with:
+    plugins: flake8-docstrings dlint flake8-bugbear flake8-simplify flake8-debugger flake8-print flake8-pep3101
+    only_warn: 1
+    extra_arguments: "${{steps.find_changed_files.outputs.changed_files}}"
+```
