@@ -170,3 +170,17 @@ steps:
   with:
     extra_arguments: "--hang-closing"
 ```
+
+### Parameter: working_directory
+
+Change the current working-directory to execute flake8 in.
+
+This parameter is optional; by default it is set to ".".
+
+```yaml
+steps:
+- uses: actions/checkout@v4
+- uses: TrueBrain/actions-flake8@v2
+  with:
+    working_directory: "src"
+```
