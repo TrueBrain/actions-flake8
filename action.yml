@@ -38,6 +38,11 @@ inputs:
     description: 'Extra arguments given to flake8'
     required: false
     default: ''
+  working_directory:
+    description: 'Working directory to run flake8 in'
+    required: false
+    default: '.'
+
 runs:
   using: 'composite'
   steps:
@@ -55,13 +60,12 @@ runs:
     shell: bash
   - run: ${{ github.action_path }}/action/entrypoint.sh
     shell: bash
+    working-directory: ${{ inputs.working_directory }}
     env:
       INPUT_PATH: ${{ inputs.path }}
       INPUT_IGNORE: ${{ inputs.ignore }}
       INPUT_MAX_LINE_LENGTH: ${{ inputs.max_line_length }}
       INPUT_ONLY_WARN: ${{ inputs.only_warn }}
-      INPUT_FLAKE8_VERSION: ${{ inputs.flake8_version }}
-      INPUT_PLUGINS: ${{ inputs.plugins }}
       INPUT_ERROR_CLASSES: ${{ inputs.error_classes }}
       INPUT_WARNING_CLASSES: ${{ inputs.warning_classes }}
       INPUT_EXTRA_ARGUMENTS: ${{ inputs.extra_arguments }}

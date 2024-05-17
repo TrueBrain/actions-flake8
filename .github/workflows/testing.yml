@@ -92,6 +92,15 @@ jobs:
         path: example_length
         extra_arguments: "--max-line-length 90"
 
+  run_action_with_working_dir:
+    name: Test run action (working dir)
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: ./
+      with:
+        working_directory: example_valid
+
   codespell:
     name: Check for spelling errors
     runs-on: ubuntu-latest
