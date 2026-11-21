@@ -2,18 +2,25 @@
 
 # Enable the matcher.
 ACTION_FOLDER=$(dirname ${0})
+
+classes_regex() {
+  echo "$1" | tr a-z A-Z | tr -s ' \t' ',' | tr -cd 'A-Z0-9,' | sed 's/,,*/,/g; s/^,//; s/,$//; s/,/|/g'
+}
+
 echo " - error_classes: '${INPUT_ERROR_CLASSES}'"
-error_classes=$(echo "${INPUT_ERROR_CLASSES}" | sed "s/,//g")
-sed -i "s/{{error_classes}}/${error_classes}/g" "${ACTION_FOLDER}/flake8-matcher.json"
+error_classes=$(classes_regex "${INPUT_ERROR_CLASSES}")
+error_regex="(?:${error_classes})"
 
 echo " - warning_classes: '${INPUT_WARNING_CLASSES}'"
 if [ -n "${INPUT_WARNING_CLASSES}" ]; then
-  warning_classes=$(echo "${INPUT_WARNING_CLASSES}" | sed "s/,//g")
-  sed -i "s/{{warning_classes}}/${warning_classes}/g" "${ACTION_FOLDER}/flake8-matcher.json"
+  warning_regex="(?:$(classes_regex "${INPUT_WARNING_CLASSES}"))"
 else
-  sed -i "s/{{warning_classes}}/^${error_classes}/g" "${ACTION_FOLDER}/flake8-matcher.json"
+  warning_regex="(?!${error_regex}[0-9]* )[A-Z]+"
 fi
-echo "::add-matcher::${ACTION_FOLDER}/flake8-matcher.json"
+
+MATCHER_FILE=$(mktemp "${RUNNER_TEMP:-/tmp}/flake8-matcher.XXXXXX")
+sed -e "s/{{error_classes}}/${error_regex}/" -e "s/{{warning_classes}}/${warning_regex}/" "${ACTION_FOLDER}/flake8-matcher.json" > "${MATCHER_FILE}"
+echo "::add-matcher::${MATCHER_FILE}"
 
 # Create the flake8 arguments.
 echo "Running flake8 on '${INPUT_PATH}' with the following options:"

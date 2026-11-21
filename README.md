@@ -153,7 +153,7 @@ steps:
 - uses: actions/checkout@v7
 - uses: TrueBrain/actions-flake8@v2
   with:
-    warning_classes: W,B,D
+    warning_classes: W,B,D,SIM
 ```
 
 ### Parameter: extra_arguments
