@@ -11,7 +11,7 @@ Any warnings or errors will be annotated in the Pull Request.
 
 ```yaml
 steps:
-- uses: actions/checkout@v4
+- uses: actions/checkout@v7
 - uses: TrueBrain/actions-flake8@v2
 ```
 
@@ -21,8 +21,8 @@ By default, it uses the default Python version as installed on the GitHub Runner
 
 ```yaml
 steps:
-- uses: actions/checkout@v4
-- uses: actions/setup-python@v5
+- uses: actions/checkout@v7
+- uses: actions/setup-python@v7
   with:
     python-version: "3.10"
 - uses: TrueBrain/actions-flake8@v2
@@ -38,7 +38,7 @@ This parameter is optional; by default the latest flake8 will be installed (if n
 
 ```yaml
 steps:
-- uses: actions/checkout@v4
+- uses: actions/checkout@v7
 - uses: TrueBrain/actions-flake8@v2
   with:
     flake8_version: 6.1.0
@@ -48,7 +48,7 @@ Alternatively, you can pre-install flake8 before executing this action:
 
 ```yaml
 steps:
-- uses: actions/checkout@v4
+- uses: actions/checkout@v7
 - run: pip install flake8==7.0.0
 - uses: TrueBrain/actions-flake8@v2
 ```
@@ -64,7 +64,7 @@ This parameter is optional; by default `flake8` will run on your whole repositor
 
 ```yaml
 steps:
-- uses: actions/checkout@v4
+- uses: actions/checkout@v7
 - uses: TrueBrain/actions-flake8@v2
   with:
     path: src
@@ -78,7 +78,7 @@ This parameter is optional; by default no alerts will be ignored
 
 ```yaml
 steps:
-- uses: actions/checkout@v4
+- uses: actions/checkout@v7
 - uses: TrueBrain/actions-flake8@v2
   with:
     ignore: E4,W
@@ -92,7 +92,7 @@ This parameter is optional; by default flake8's default line length will be used
 
 ```yaml
 steps:
-- uses: actions/checkout@v4
+- uses: actions/checkout@v7
 - uses: TrueBrain/actions-flake8@v2
   with:
     max_line_length: 90
@@ -108,7 +108,7 @@ This parameter is optional; setting this to any value will enable it.
 
 ```yaml
 steps:
-- uses: actions/checkout@v4
+- uses: actions/checkout@v7
 - uses: TrueBrain/actions-flake8@v2
   with:
     only_warn: 1
@@ -122,7 +122,7 @@ This parameter is optional; setting this to any value will enable it.
 
 ```yaml
 steps:
-- uses: actions/checkout@v4
+- uses: actions/checkout@v7
 - uses: TrueBrain/actions-flake8@v2
   with:
     plugins: flake8-bugbear cohesion==0.9.1
@@ -136,7 +136,7 @@ This parameter is optional; by default `E` and `F` classes will be considered er
 
 ```yaml
 steps:
-- uses: actions/checkout@v4
+- uses: actions/checkout@v7
 - uses: TrueBrain/actions-flake8@v2
   with:
     error_classes: E,H
@@ -150,7 +150,7 @@ This parameter is optional; by default all classes not contained in `error_class
 
 ```yaml
 steps:
-- uses: actions/checkout@v4
+- uses: actions/checkout@v7
 - uses: TrueBrain/actions-flake8@v2
   with:
     warning_classes: W,B,D
@@ -165,7 +165,7 @@ This parameter is optional; by default it is empty.
 
 ```yaml
 steps:
-- uses: actions/checkout@v4
+- uses: actions/checkout@v7
 - uses: TrueBrain/actions-flake8@v2
   with:
     extra_arguments: "--hang-closing"
@@ -179,7 +179,7 @@ This parameter is optional; by default it is set to ".".
 
 ```yaml
 steps:
-- uses: actions/checkout@v4
+- uses: actions/checkout@v7
 - uses: TrueBrain/actions-flake8@v2
   with:
     working_directory: "src"
