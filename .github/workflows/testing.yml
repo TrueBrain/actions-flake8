@@ -82,6 +82,25 @@ jobs:
         error_classes: W,B
         only_warn: 1
 
+  run_action_with_multi_letter_classes:
+    name: Test run action (multi-letter classes)
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v7
+    - uses: ./
+      with:
+        plugins: flake8-simplify
+        path: example_simplify
+        warning_classes: SIM
+        only_warn: 1
+    - run: python3 .github/check_matcher.py warning
+    - uses: ./
+      with:
+        path: example_simplify
+        error_classes: SIM
+        only_warn: 1
+    - run: python3 .github/check_matcher.py error
+
   run_action_with_extra_arguments:
     name: Test run action (extra arguments)
     runs-on: ubuntu-latest
