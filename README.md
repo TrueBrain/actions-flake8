@@ -184,3 +184,26 @@ steps:
   with:
     working_directory: "src"
 ```
+
+## Advanced use-case
+
+The section below is an effort to document advanced use-cases that don't fit in the scope of this action.
+
+### Run flake8 on changed files only
+
+To only run flake8 on the Python files changed by a Pull Request:
+
+```yaml
+steps:
+- uses: actions/checkout@v7
+  with:
+    fetch-depth: 2
+- id: changed_files
+  run: echo "files=$(git diff --name-only --diff-filter=d HEAD^1 HEAD -- '*.py' | tr '\n' ' ')" >> "$GITHUB_OUTPUT"
+- uses: TrueBrain/actions-flake8@v2
+  if: steps.changed_files.outputs.files != ''
+  with:
+    extra_arguments: ${{ steps.changed_files.outputs.files }}
+```
+
+This only works for `pull_request` events, as `HEAD^1` is the base branch of the merge commit GitHub creates for a Pull Request.
