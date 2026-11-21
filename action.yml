@@ -38,30 +38,33 @@ inputs:
     description: 'Extra arguments given to flake8'
     required: false
     default: ''
+  working_directory:
+    description: 'Working directory to run flake8 in'
+    required: false
+    default: '.'
+
 runs:
   using: 'composite'
   steps:
   - run: |
-      if [ -z "${{ inputs.flake8_version }}" ]; then
+      if [ -z "${INPUT_FLAKE8_VERSION}" ]; then
         flake8_version=""
       else
-        flake8_version="==${{ inputs.flake8_version }}"
+        flake8_version="==${INPUT_FLAKE8_VERSION}"
       fi
-      plugins=
-      if [ -n "${{ inputs.plugins }}" ]; then
-        plugins="${{ inputs.plugins }}"
-      fi
-      pip install flake8${flake8_version} ${plugins}
+      PIP_BREAK_SYSTEM_PACKAGES=1 pip install "flake8${flake8_version}" ${INPUT_PLUGINS}
     shell: bash
+    env:
+      INPUT_FLAKE8_VERSION: ${{ inputs.flake8_version }}
+      INPUT_PLUGINS: ${{ inputs.plugins }}
   - run: ${{ github.action_path }}/action/entrypoint.sh
     shell: bash
+    working-directory: ${{ inputs.working_directory }}
     env:
       INPUT_PATH: ${{ inputs.path }}
       INPUT_IGNORE: ${{ inputs.ignore }}
       INPUT_MAX_LINE_LENGTH: ${{ inputs.max_line_length }}
       INPUT_ONLY_WARN: ${{ inputs.only_warn }}
-      INPUT_FLAKE8_VERSION: ${{ inputs.flake8_version }}
-      INPUT_PLUGINS: ${{ inputs.plugins }}
       INPUT_ERROR_CLASSES: ${{ inputs.error_classes }}
       INPUT_WARNING_CLASSES: ${{ inputs.warning_classes }}
       INPUT_EXTRA_ARGUMENTS: ${{ inputs.extra_arguments }}

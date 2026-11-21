@@ -10,7 +10,7 @@ jobs:
     name: Test run action (triggers warnings)
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v7
     - uses: ./
       with:
         path: example
@@ -21,7 +21,7 @@ jobs:
     name: Test run action (valid)
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v7
     - uses: ./
       with:
         path: example_valid
@@ -30,30 +30,30 @@ jobs:
     name: Test run action (valid with custom Flake8)
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - run: pip install flake8==3.8.0
+    - uses: actions/checkout@v7
+    - run: pip install flake8==7.0.0
     - uses: ./
       with:
         path: example_valid
 
   run_action_valid_flake8_version:
-    name: Test run action (valid with Flake 3.8.0)
+    name: Test run action (valid with Flake8 7.0.0)
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v7
     - uses: ./
       with:
         path: example_valid
-        flake8_version: 3.8.0
+        flake8_version: 7.0.0
 
   run_action_valid_py39:
-    name: Test run action (valid with Python 3.9)
+    name: Test run action (valid with Python 3.10)
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-python@v3
+    - uses: actions/checkout@v7
+    - uses: actions/setup-python@v7
       with:
-        python-version: 3.9
+        python-version: "3.10"
     - uses: ./
       with:
         path: example_valid_py39
@@ -62,41 +62,69 @@ jobs:
     name: Test run action (plugins)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: ./
-        with:
-          plugins: flake8-bugbear
-          path: example_bugbear
-          only_warn: 1
+    - uses: actions/checkout@v7
+    - uses: ./
+      with:
+        plugins: flake8-bugbear
+        path: example_bugbear
+        only_warn: 1
 
   run_action_with_classes:
     name: Test run action (classes)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: ./
-        with:
-          plugins: flake8-bugbear
-          path: example_bugbear
-          warning_classes: E,F
-          error_classes: W,B
-          only_warn: 1
+    - uses: actions/checkout@v7
+    - uses: ./
+      with:
+        plugins: flake8-bugbear
+        path: example_bugbear
+        warning_classes: E,F
+        error_classes: W,B
+        only_warn: 1
+
+  run_action_with_multi_letter_classes:
+    name: Test run action (multi-letter classes)
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v7
+    - uses: ./
+      with:
+        plugins: flake8-simplify
+        path: example_simplify
+        warning_classes: SIM
+        only_warn: 1
+    - run: python3 .github/check_matcher.py warning
+    - uses: ./
+      with:
+        path: example_simplify
+        error_classes: SIM
+        only_warn: 1
+    - run: python3 .github/check_matcher.py error
 
   run_action_with_extra_arguments:
     name: Test run action (extra arguments)
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v7
     - uses: ./
       with:
         path: example_length
         extra_arguments: "--max-line-length 90"
 
+  run_action_with_working_dir:
+    name: Test run action (working dir)
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v7
+    - uses: ./
+      with:
+        working_directory: example_valid
+
   codespell:
     name: Check for spelling errors
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v7
     - uses: codespell-project/actions-codespell@master
       with:
         check_filenames: true
