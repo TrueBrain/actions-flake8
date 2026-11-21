@@ -24,7 +24,7 @@ steps:
 - uses: actions/checkout@v4
 - uses: actions/setup-python@v5
   with:
-    python-version: 3.9
+    python-version: "3.10"
 - uses: TrueBrain/actions-flake8@v2
   with:
     path: src
@@ -49,7 +49,7 @@ Alternatively, you can pre-install flake8 before executing this action:
 ```yaml
 steps:
 - uses: actions/checkout@v4
-- run: pip install flake8==3.8.0
+- run: pip install flake8==7.0.0
 - uses: TrueBrain/actions-flake8@v2
 ```
 
