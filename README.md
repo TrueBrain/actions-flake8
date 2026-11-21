@@ -187,28 +187,23 @@ steps:
 
 ## Advanced use-case
 
-The section below is an effort to document advanced use-cases that don't fit in the scope of this action. 
-
-Feel free to contribute to it ! 
-
+The section below is an effort to document advanced use-cases that don't fit in the scope of this action.
 
 ### Run flake8 on changed files only
 
-If you want to run flake8 only against changed files you can achieve it using the following code : 
+To only run flake8 on the Python files changed by a Pull Request:
 
-```
-- uses: actions/checkout@v2
+```yaml
+steps:
+- uses: actions/checkout@v7
   with:
-    fetch-depth: -1
-- name: Setup Python
-  uses: actions/setup-python@v2
-  with:
-    python-version: 3.9
-- id: find_changed_files
-  run: echo ::set-output name=changed_files::$(git diff --name-only ${{github.sha}} ${{github.event.pull_request.base.sha}} | tr ' ' '\n' | grep .py | tr '\n' ' ')
+    fetch-depth: 2
+- id: changed_files
+  run: echo "files=$(git diff --name-only --diff-filter=d HEAD^1 HEAD -- '*.py' | tr '\n' ' ')" >> "$GITHUB_OUTPUT"
 - uses: TrueBrain/actions-flake8@v2
+  if: steps.changed_files.outputs.files != ''
   with:
-    plugins: flake8-docstrings dlint flake8-bugbear flake8-simplify flake8-debugger flake8-print flake8-pep3101
-    only_warn: 1
-    extra_arguments: "${{steps.find_changed_files.outputs.changed_files}}"
+    extra_arguments: ${{ steps.changed_files.outputs.files }}
 ```
+
+This only works for `pull_request` events, as `HEAD^1` is the base branch of the merge commit GitHub creates for a Pull Request.
