@@ -47,17 +47,16 @@ runs:
   using: 'composite'
   steps:
   - run: |
-      if [ -z "${{ inputs.flake8_version }}" ]; then
+      if [ -z "${INPUT_FLAKE8_VERSION}" ]; then
         flake8_version=""
       else
-        flake8_version="==${{ inputs.flake8_version }}"
+        flake8_version="==${INPUT_FLAKE8_VERSION}"
       fi
-      plugins=
-      if [ -n "${{ inputs.plugins }}" ]; then
-        plugins="${{ inputs.plugins }}"
-      fi
-      PIP_BREAK_SYSTEM_PACKAGES=1 pip install flake8${flake8_version} ${plugins}
+      PIP_BREAK_SYSTEM_PACKAGES=1 pip install "flake8${flake8_version}" ${INPUT_PLUGINS}
     shell: bash
+    env:
+      INPUT_FLAKE8_VERSION: ${{ inputs.flake8_version }}
+      INPUT_PLUGINS: ${{ inputs.plugins }}
   - run: ${{ github.action_path }}/action/entrypoint.sh
     shell: bash
     working-directory: ${{ inputs.working_directory }}
